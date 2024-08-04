@@ -5,6 +5,7 @@ import { defaultConfig } from './defaultConfig';
 const ConfigContext = createContext();
 
 export const ConfigProvider = ({ children, config = defaultConfig }) => {
+
   return (
     <ConfigContext.Provider value={config}>
       {children}
@@ -19,5 +20,3 @@ export const useConfig = () => {
   }
   return context;
 };
-
-

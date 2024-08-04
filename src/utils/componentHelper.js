@@ -1,4 +1,4 @@
-import { useConfig } from "../../ConfigContext";
+import { useConfig } from "../ConfigContext";
 import { getUserATA } from "../api";
 import { AirdropCard, CardItem, ItemButton, ButtonModal } from "../components/base";
 

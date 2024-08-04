@@ -6,24 +6,36 @@ A React SDK for integrating airdrop functionalities into your application.
 ## Installation
 
 ```bash
-npm install airdrop-sdk
+npm install {airdrop-sdk-tgz}
 ```
 
 ## Usage
 
-### ConfigProvider
+### Configuration
 
-Wrap your application with `ConfigProvider` to provide configuration settings:
+Wrap your application with `ConfigProvider` to provide configuration settings,
+Also You have add following additional providers for using our components:
 
 ```javascript
 import React from 'react';
 import { ConfigProvider } from 'airdrop-sdk';
+import { ConfigProvider, SolanaWalletProvider, SolanaModalProvider } from "airdrop-sdk";
+import { ChakraProvider } from "@chakra-ui/react";
 
 function App() {
   return (
+    <React.StrictMode>
     <ConfigProvider>
-      <YourAppComponents />
+      <ChakraProvider>
+        <SolanaWalletProvider>
+          <SolanaModalProvider>
+             <YourAppComponents />
+          </SolanaModalProvider>
+        </SolanaWalletProvider>
+      </ChakraProvider>
     </ConfigProvider>
+  </React.StrictMode>
+     
   );
 }
 
@@ -35,7 +47,7 @@ see the [defaultConfig](#defaultconfig)
 You can create your own configuration file and register it in ConfigProvider, also u can inherit from defaultConfig and make particular changes to it:
 e.g. sdkConfigOverride:
 ```javascript
-import defaultConfig from 'sdk/defaultConfig';
+import defaultConfig from 'airdrop-sdk/lib/defaultConfig';
 
 const sdkConfig = defaultConfig;
 
@@ -197,7 +209,7 @@ You can use our api methods within your own componetnts:
 ### Components
 
 #### pre-built components:
-    You can import pre-built componetnts from 'sdk/components'
+    You can import pre-built componetnts from 'airdrop-sdk/lib/components'
 - useWallet component is used for connecting users wallet and returns wallet object
 - Login: 
     - @param: wallet - pass the returned wallet object from useWallet
@@ -215,8 +227,8 @@ You can use our api methods within your own componetnts:
 
 #### custom components:
     You can use our general component and helper functions to generate a configurable component.
-    comopent path: 'sdk/component/general';
-    helpers path: 'sdk/utils/componentHelper.js';
+    comopent path: 'airdrop-sdk/lib/component/base';
+    helpers path: 'airdrop-sdk/lib/utils/componentHelper.js';
 
 
 ## Directory Structure

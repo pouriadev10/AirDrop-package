@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Box, Text, Flex } from '@chakra-ui/react';
 import { GetProgramAccount } from '../../api';
-import { useConfig } from '../../..';
+import { useConfig } from '../..';
 import { CardItem } from './CardItem';
 
 /**

@@ -1,3 +1,4 @@
-export * from './airdrop/Auth';
-export * from './airdrop/Dashboard';
-export * from "@solana/wallet-adapter-react";
+
+export * from './airdrop';
+export * from './base';
+export * from './wallet';

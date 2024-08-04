@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Text, Button, Flex } from '@chakra-ui/react';
 import { CallProgramInstruction } from '../../api';
 import { parseFormValues, getInstructionAdditionalData } from '../../utils/componentHelper';
-import { useConfig } from '../../..';
+import { useConfig } from '../..';
 import { ButtonModal } from './ButtonModal';
 
 /**

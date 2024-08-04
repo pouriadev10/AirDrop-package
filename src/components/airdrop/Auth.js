@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { blockchainLogin, blockchainSignup } from '../../api';
-import { Button, Text, ButtonModal, Flex } from '../base';
-import { useConfig } from "../../../ConfigContext";
+import { Button, Text, Flex } from '@chakra-ui/react';
+import { ButtonModal } from '../base';
+import { useConfig } from "../../ConfigContext";
 
 /**
  * Login component allows users to log in using their wallet.

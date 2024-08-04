@@ -3,7 +3,6 @@ export const defaultConfig = {
   airdropAppRoot: "airdrop",
   authAppRoot: "bc-auth",
   authNetwork: "solana",
-
   authProvider: "devnet",
   loginComponent: {
     label: {
