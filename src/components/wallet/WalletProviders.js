@@ -9,8 +9,8 @@ import {
 } from './Adapters';
 
 const adapters = [
-    PhantomWalletAdapter,
-    SolflareWalletAdapter,
+    PhantomWalletAdapter(),
+    SolflareWalletAdapter(),
 ]
 
 export const SolanaWalletProvider = ({ children, wallets = adapters }) => {
