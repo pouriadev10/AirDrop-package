@@ -74,6 +74,7 @@ export default {
     }),
     inject({
       process: 'process',
+      Buffer: ['buffer', 'Buffer'], // Inject Buffer from buffer package
     }),
     terser()
 
@@ -92,5 +93,6 @@ export default {
     '@solana/wallet-adapter-react-ui',
     '@project-serum/anchor',
     'bs58',
+    'buffer',
   ],
 };

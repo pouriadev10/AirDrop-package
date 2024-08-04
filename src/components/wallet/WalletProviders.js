@@ -3,29 +3,21 @@ import {
     ConnectionProvider, 
     WalletProvider,
 } from '@solana/wallet-adapter-react';
-import {
-    PhantomWalletAdapter,
-    SolflareWalletAdapter,
-} from './Adapters';
 
-const adapters = [
-    PhantomWalletAdapter(),
-    SolflareWalletAdapter(),
-]
 
-export const SolanaWalletProvider = ({ children, wallets = adapters }) => {
+export const SolanaWalletProvider = ({ children, wallets }) => {
     return (
-            <WalletProvider wallets={wallets} autoConnect>
-                {children}
-            </WalletProvider>
+        <WalletProvider wallets={wallets} autoConnect>
+            {children}
+        </WalletProvider>
     );
 };
   
 export const SolanaConnectionProvider = ({ children, provider = 'devnet' }) => {
     const endpoint = clusterApiUrl(provider);
     return (
-            <ConnectionProvider endpoint={endpoint}>
-                {children}
-            </ConnectionProvider>
+        <ConnectionProvider endpoint={endpoint}>
+            {children}
+        </ConnectionProvider>
     );
 };

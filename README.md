@@ -21,13 +21,18 @@ import React from 'react';
 import { ConfigProvider } from 'airdrop-sdk';
 import { ConfigProvider, SolanaWalletProvider, SolanaModalProvider } from "airdrop-sdk";
 import { ChakraProvider } from "@chakra-ui/react";
+import { PhantomWalletAdapter, SolflareWalletAdapter } from "airdrop-sdk";
 
+const wallets = [
+  new PhantomWalletAdapter(),
+  new SolflareWalletAdapter(),
+]
 function App() {
   return (
     <React.StrictMode>
     <ConfigProvider>
       <ChakraProvider>
-        <SolanaWalletProvider>
+        <SolanaWalletProvider wallets={wallets}>
           <SolanaModalProvider>
              <YourAppComponents />
           </SolanaModalProvider>
