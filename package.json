@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A React SDK for integrating airdrop functionalities into your application.",
   "private": true,
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "build": "webpack",
     "test": "jest"
@@ -22,6 +22,9 @@
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
     "@project-serum/anchor": "^0.26.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@solana/spl-token": "^0.4.8",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.35",
@@ -30,7 +33,9 @@
     "bs58": "^4.0.1",
     "crypto-browserify": "^3.12.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "rollup": "^4.19.2",
+    "rollup-plugin-postcss": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
