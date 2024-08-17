@@ -155,16 +155,6 @@ You can use our api methods within your own componetnts:
  * @returns {Promise<object>} - Parsed transaction details
  */
 
-
-#### getUserATA:
-/**
- * Get User Associated Token Address (ATA)
- * @param {string} backendUrl - Backend URL
- * @param {string} appRoot - Application root path
- * @param {string} authToken - Authentication token
- * @param {string} mintTokenId - Mint token ID
- * @returns {Promise<string|null>} - User ATA address or null if not found
- */
 #### CreateATA:
 /**
  * Create an Associated Token Account (ATA)
@@ -175,6 +165,19 @@ You can use our api methods within your own componetnts:
  * @param {string} mintTokenId - Mint token ID
  * @returns {Promise<string|null>} - Transaction signature or null if failed
  */
+
+
+#### getUserATA:
+/**
+ * Get User Associated Token Address (ATA)
+ * @param {string} backendUrl - Backend URL
+ * @param {string} appRoot - Application root path
+ * @param {string} authToken - Authentication token
+ * @param {string} mintTokenId - Mint token ID
+ * @returns {Promise<string|null>} - User ATA address or null if not found
+ */
+
+
 #### getTokenTransaction:
 /**
  * Get Transaction for a Token
@@ -249,16 +252,13 @@ You can use our api methods within your own componetnts:
 
 ### defaultConfig:
 ```javascript
-import { VStack } from "@chakra-ui/react";
-import { color } from "framer-motion";
-
 export const defaultConfig = {
   backendUrl: "http://127.0.0.1:8000/",
   airdropAppRoot: "airdrop",
   authAppRoot: "bc-auth",
   authNetwork: "solana",
-
   authProvider: "devnet",
+  defaultProgramId: 1,
   loginComponent: {
     label: {
       text: "Login with Blockchain",
@@ -304,6 +304,7 @@ export const defaultConfig = {
   programId: 1,
   mintTokenId: 1,
   airdropDashboardComponent: {
+    programId: 1,
     label: {
       text: "Airdrop Dashboard",
       labelProps: {
@@ -650,6 +651,28 @@ export const defaultConfig = {
         }
       }
     ]
+  },
+  allTasks: {
+    taskStatus: ["active", "inactive", "pending_initialization", "failed_initialization"],
+    showInstructionCalls: true,
+    
+  },
+  createTask: {
+    label: {
+      text: "Create New Task",
+    }
+  },
+  privateInstructionCalls: {
+    instructionType: "private",
+    instructionStatus: ["assembled", "failed", "finalized"],
+  },
+  publicInstructionCalls: {
+    instructionType: "public",
+    instructionStatus: ["assembled", "failed", "finalized"],
+  },
+  taskInstructionCalls: {
+    instructionType: "task_caller",
+    instructionStatus: ["assembled", "failed", "finalized"],
   }
 }
 ```

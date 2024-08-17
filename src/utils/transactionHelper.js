@@ -30,16 +30,19 @@ export const signTransaction = async (wallet, assembledTransaction) => {
  * @param {string|null} programId - Program ID
  * @returns {Promise<string>} - Transaction signature
  */
-export const sendTransaction = async (backendUrl, appRoot, authToken, encodedTransaction, mintTokenId = null, programId = null) => {
+export const sendTransaction = async (backendUrl, appRoot, authToken, encodedTransaction) => {
     const endpoint = "api/send-signed-transaction/";
     const url = await joinUrlSegments(backendUrl, appRoot, endpoint);
     const payload = { signed_transaction: encodedTransaction };
-    if (mintTokenId) {
-        payload["mint_token"] = mintTokenId;
-    }
-    if (programId) {
-        payload["program"] = programId;
-    }
+    // if (mintTokenId) {
+    //     payload["mint_token"] = mintTokenId;
+    // }
+    // if (programId) {
+    //     payload["program"] = programId;
+    // }
+    // if (instructionCallId) {
+    //     payload["instruction_call"] = instructionCallId;
+    // }
     const response = await fetch(url, {
         method: 'POST',
         headers: {

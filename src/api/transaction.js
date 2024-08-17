@@ -1,25 +1,28 @@
 import { joinUrlSegments } from "../utils/urlHelper";
+import { sendTransaction, signTransaction } from '../utils/transactionHelper';
 
-/**
- * Get User Transactions List
- * @param {string} backendUrl - Backend URL
- * @param {string} appRoot - Application root path
- * @param {string} authToken - Authentication token
- * @returns {Promise<object>} - List of user transactions
- */
-export const GetUserTransactionsList = async (backendUrl, appRoot, authToken) => {
-    const endpoint = "api/user-transactions-list/";
+
+export const SignAndSendTransaction = async (backendUrl, appRoot, authToken, wallet, instructionTransactionId) => {
+    const endpoint = "api/retrieve-assembled-transaction/";
     const url = await joinUrlSegments(backendUrl, appRoot, endpoint);
+    const payload = {
+        instruction_transaction: instructionTransactionId,
+    };
     const response = await fetch(url, {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': authToken,
         },
+        body: JSON.stringify(payload),
     });
-    const result = await response.json();
     if (!response.ok) {
-        console.error(`Error in getting user transactions list: ${JSON.stringify(result)}`);
+        console.error(`Error in assembling program Transaction: ${JSON.stringify(await response.json())}`);
+        return null;
     }
-    return result;
+    const result = await response.json();
+    const encodedTransaction = await signTransaction(wallet, result.assembledTransaction);
+    const signature = await sendTransaction(backendUrl, appRoot, authToken, encodedTransaction);
+    return signature;
 };
+

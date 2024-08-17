@@ -15,21 +15,19 @@ import { CardItem } from './CardItem';
  * @param {Array} items - An array of item configurations to be displayed in the card.
  * @returns {JSX.Element} - The rendered AirdropCard component.
  */
-export const AirdropCard = ({ authToken, wallet, label, flexProps, boxProps, accountTypeName, items }) => {
+export const AirdropCard = ({ programId, authToken, wallet, label, flexProps, boxProps, accountTypeName, items }) => {
     const config = useConfig();
     const [account, setAccount] = useState(null);
 
     useEffect(() => {
         const fetchAccount = async () => {
-            console.log('Fetching account...');
             const account = await GetProgramAccount(
                 config.backendUrl,
                 config.airdropAppRoot,
                 authToken,
-                config.programId,
+                programId,
                 accountTypeName,
             );
-            console.log('Account fetched:', account);
             setAccount(account);
         };
 
@@ -50,6 +48,7 @@ export const AirdropCard = ({ authToken, wallet, label, flexProps, boxProps, acc
                         buttons={item.buttons}
                         flexProps={item.flexProps}
                         boxProps={item.boxProps}
+                        programId={programId}
                     />
                 ))}
             </Box>

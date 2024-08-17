@@ -13,7 +13,7 @@ import { ItemButton } from './ItemButton';
  * @param {Object} boxProps - Additional props for the Box container.
  * @returns {JSX.Element} - The rendered CardItem component.
  */
-export const CardItem = ({ authToken, wallet, account, detail = null, buttons = null, flexProps, boxProps }) => {
+export const CardItem = ({ programId, authToken, wallet, account, detail = null, buttons = null, flexProps, boxProps }) => {
     const getValue = () => {
         const value = account[detail.accountField]
         if (detail.decimalCount) {
@@ -38,6 +38,7 @@ export const CardItem = ({ authToken, wallet, account, detail = null, buttons = 
                         {buttons.map((button, index) => (
                             <ItemButton
                                 key={index} // Ensure each button has a unique key
+                                programId={programId}
                                 authToken={authToken}
                                 wallet={wallet}
                                 label={button.label}

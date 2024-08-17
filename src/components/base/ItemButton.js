@@ -17,7 +17,7 @@ import { ButtonModal } from './ButtonModal';
  * @param {Array} [additionalInstructionData=[]] - Additional data required for the instruction.
  * @returns {JSX.Element} - The rendered ItemButton component.
  */
-export const ItemButton = ({ authToken, wallet, label, flexProps, buttonProps, instructionName, modalData = null, additionalInstructionData = [] }) => {
+export const ItemButton = ({ programId, authToken, wallet, label, flexProps, buttonProps, instructionName, modalData = null, additionalInstructionData = [] }) => {
     const config = useConfig();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formValues, setFormValues] = useState({});
@@ -39,7 +39,7 @@ export const ItemButton = ({ authToken, wallet, label, flexProps, buttonProps, i
                 config.airdropAppRoot,
                 authToken,
                 wallet,
-                config.programId,
+                programId,
                 instructionName,
                 data,
             );

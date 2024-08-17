@@ -4,6 +4,7 @@ export const defaultConfig = {
   authAppRoot: "bc-auth",
   authNetwork: "solana",
   authProvider: "devnet",
+  defaultProgramId: 1,
   loginComponent: {
     label: {
       text: "Login with Blockchain",
@@ -49,6 +50,7 @@ export const defaultConfig = {
   programId: 1,
   mintTokenId: 1,
   airdropDashboardComponent: {
+    programId: 1,
     label: {
       text: "Airdrop Dashboard",
       labelProps: {
@@ -395,5 +397,27 @@ export const defaultConfig = {
         }
       }
     ]
+  },
+  allTasks: {
+    taskStatus: ["active", "inactive", "pending_initialization", "failed_initialization"],
+    showInstructionCalls: true,
+    
+  },
+  createTask: {
+    label: {
+      text: "Create New Task",
+    }
+  },
+  privateInstructionCalls: {
+    instructionType: "private",
+    instructionStatus: ["assembled", "failed", "finalized"],
+  },
+  publicInstructionCalls: {
+    instructionType: "public",
+    instructionStatus: ["assembled", "failed", "finalized"],
+  },
+  taskInstructionCalls: {
+    instructionType: "task_caller",
+    instructionStatus: ["assembled", "failed", "finalized"],
   }
 }

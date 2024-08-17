@@ -108,3 +108,23 @@ export const getProgramTransaction = async (backendUrl, appRoot, authToken, prog
     const requestPromise = connection.getTransaction(signature, commitment);
     return await handleRequestTimeout(requestPromise, backOff, retryCount);
 };
+
+
+export const GetProgramList = async (backendUrl, appRoot, authToken) => {
+    const endpoint = "api/program-list/";
+    const url = await joinUrlSegments(backendUrl, appRoot, endpoint);
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': authToken,
+        },
+    });
+    const result = await response.json();
+    if (!response.ok) {
+        console.error(`Error in getting user transactions list: ${JSON.stringify(result)}`);
+    }
+    console.log(result, typeof(result))
+    return result;
+}

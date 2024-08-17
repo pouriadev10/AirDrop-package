@@ -11,7 +11,8 @@ import {
     ModalCloseButton, 
     Input, 
     VStack, 
-    Flex
+    Flex,
+    Checkbox
 } from '@chakra-ui/react';
 
 /**
@@ -28,7 +29,14 @@ import {
  */
 export const ButtonModal = ({ label, inputFields, isModalOpen, setIsModalOpen, formValues, setFormValues, onSubmit, modalProps, }) => {
     const handleInputChange = useCallback((field, value) => {
-        setFormValues(prevValues => ({ ...prevValues, [field.fieldName]: value }));
+        setFormValues(prevValues => ({ ...prevValues, [field.payloadName]: value }));
+    }, [setFormValues]);
+
+    const handleCheckboxChange = useCallback((field) => {
+        setFormValues(prevValues => ({ 
+            ...prevValues, 
+            [field.payloadName]: !prevValues[field.payloadName] // toggle the boolean value
+        }));
     }, [setFormValues]);
 
     const handleSubmit = useCallback(() => {
@@ -37,30 +45,40 @@ export const ButtonModal = ({ label, inputFields, isModalOpen, setIsModalOpen, f
     }, [formValues, onSubmit, setIsModalOpen]);
 
     return (
-        <Flex {...modalProps.flex}>
-            <Modal {...modalProps.modal} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <Flex {...modalProps?.flex}>
+            <Modal {...modalProps?.modal} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader {...label.header}>
                         <Text {...label.labelProps}>{label.text}</Text>
                     </ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody {...modalProps.body}>
-                        <VStack {...modalProps.vStack} spacing={4}>
+                    <ModalBody {...modalProps?.body}>
+                        <VStack {...modalProps?.vStack} spacing={4}>
                             {inputFields.map((field) => (
-                                <Input
-                                    key={field.fieldName}
-                                    placeholder={field.fieldName}
-                                    value={formValues[field.fieldName] || ''}
-                                    onChange={(e) => handleInputChange(field, e.target.value)}
-                                    type={field.fieldType === 'int' ? 'number' : 'text'}
-                                />
+                                field.fieldType == "boolean" ? (
+                                    <Checkbox
+                                        key={field.payloadName}
+                                        isChecked={formValues[field.payloadName] || false}
+                                        onChange={() => handleCheckboxChange(field)}
+                                    >
+                                        {field.fieldName}
+                                    </Checkbox>
+                                ):(
+                                    <Input
+                                        key={field.payloadName}
+                                        placeholder={field.fieldName}
+                                        value={formValues[field.payloadName] || ''}
+                                        onChange={(e) => handleInputChange(field, e.target.value)}
+                                        type={field.fieldType}
+                                    />
+                                )
                             ))}
                         </VStack>
                     </ModalBody>
-                    <ModalFooter {...modalProps.footer}>
-                        <Button {...modalProps.submitButton} onClick={handleSubmit}>Submit</Button>
-                        <Button {...modalProps.cancelButton} onClick={() => setIsModalOpen(false)}>Cancel</Button>
+                    <ModalFooter {...modalProps?.footer}>
+                        <Button {...modalProps?.submitButton} onClick={handleSubmit}>Submit</Button>
+                        <Button {...modalProps?.cancelButton} onClick={() => setIsModalOpen(false)}>Cancel</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

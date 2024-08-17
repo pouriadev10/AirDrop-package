@@ -1,6 +1,6 @@
 import { useConfig } from "../ConfigContext";
 import { getUserATA } from "../api";
-import { AirdropCard, CardItem, ItemButton, ButtonModal } from "../components/base";
+import { AirdropCard, CardItem, ItemButton, ButtonModal, InstructionCalls, TaskList, TaskCreateButton } from "../components/base";
 
 /**
  * Parses a value based on its type and optionally scales it by a decimal count.
@@ -105,6 +105,9 @@ export const GenerateCardComponent = async (configKey) => {
     const Component = ({ authToken, wallet }) => {
         const config = useConfig();
         const cardDetail = config[configKey];
+        if (!cardDetail.programId) {
+            cardDetail.programId = config.defaultProgramId;
+        }
         return (
             <>
                 <AirdropCard 
@@ -115,10 +118,75 @@ export const GenerateCardComponent = async (configKey) => {
                     boxProps={cardDetail.boxProps}
                     accountTypeName={cardDetail.accountTypeName}
                     items={cardDetail.items}
+                    programId={cardDetail.programId}
                 />
             </>
         );
     };
-    return Component
+    return Component;
     
 };
+
+
+export const GenerateInstructionCallsComponent = async (configKey) => {
+    const Component = ({ authToken, wallet }) => {
+        const config = useConfig();
+        const instructionDetail = config[configKey];
+        return (
+            <>
+                <InstructionCalls 
+                    authToken={authToken}
+                    wallet={wallet}
+                    instructionType={instructionDetail.instructionType}
+                    instructionStatus={instructionDetail.instructionStatus}
+                    label={instructionDetail.label}
+                    boxProps={instructionDetail.boxProps}
+                    tableProps={instructionDetail.tableProps}
+                />
+            </>
+        );
+    }
+    return Component;
+}
+
+
+export const GenerateTaskListComponent = async (configKey) => {
+    const Component = ({ authToken, wallet }) => {
+        const config = useConfig();
+        const taskListDetail = config[configKey];
+        return (
+            <>
+                <TaskList 
+                    authToken={authToken}
+                    wallet={wallet}
+                    taskStatus={taskListDetail.taskStatus}
+                    showInstructionCalls={taskListDetail.showInstructionCalls}
+                    boxProps={taskListDetail.boxProps}
+                    tableProps={taskListDetail.tableProps}
+                    collapseProps={taskListDetail.collapseProps}
+                />
+            </>
+        )
+    }
+    return Component;
+}
+
+export const GenerateTaskCreateButtonComponent = async (configKey) => {
+    const Component = ({ authToken, wallet }) => {
+        const config = useConfig();
+        const buttonDetail = config[configKey];
+        return (
+            <>
+                <TaskCreateButton 
+                    authToken={authToken}
+                    wallet={wallet}
+                    label={buttonDetail.label}
+                    flexProps={buttonDetail.flexProps}
+                    buttonProps={buttonDetail.buttonProps}
+                    modalData={buttonDetail.modalData}
+                />
+            </>
+        )
+    }
+    return Component;
+}

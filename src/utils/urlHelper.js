@@ -4,7 +4,6 @@
  * @returns {string} - Joined URL
  */
 export const joinUrlSegments = async (...segments) => {
-    console.log(segments);
     return segments.map((segment, index) => {
         if (segment === undefined) {
             console.error('Undefined segment found in joinUrlSegments');
